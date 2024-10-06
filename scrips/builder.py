@@ -53,10 +53,10 @@ def clone_push(codes):
             print('{} 构建成功'.format(build_cmd))
         num,rs = subprocess.getstatusoutput('docker push {}'.format(new_tag))
         if num !=0 :
-            print('{} 推送失败,原因：{}'.format(base_registry+app_name,rs))
+            print('{} 推送失败,原因：{}'.format(new_tag,rs))
             return
         else:
-            print('{} 推送成功'.format(base_registry+app_name))
+            print('{} 推送成功'.format(new_tag))
 
 clone_push(read_codes(code_path))
         
