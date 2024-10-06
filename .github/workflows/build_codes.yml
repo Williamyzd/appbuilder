@@ -1,0 +1,31 @@
+# 工作流名称
+name: build-image-from-code 
+# 工作流运行时显示名称
+run-name: ${{ github.actor }} is build image from code 
+# 怎样触发工作流
+on:
+  push:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+# 工作流程任务（通常含有一个或多个步骤）
+jobs:
+  syncimages:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repos
+      uses: actions/checkout@v4
+
+    - name: Login to Aliyun CR
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ vars.ALY_REGISTRY}}
+        username: ${{ secrets.ALY_UNAME }}
+        password: ${{ secrets.ALY_PASSWD }}
+        logout: false
+    
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.10' 
+    - run: python scrips/builder.py       
