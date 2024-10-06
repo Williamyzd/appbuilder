@@ -1,0 +1,6 @@
+[{
+    "name": "vllm",
+    "tag": "vllm-cpu-env:v20241006",
+    "url": "https://github.com/vllm-project/vllm.git",
+    "cmd": "cd vllm && docker build -f Dockerfile.cpu -t vllm-cpu-env:v20241006 --shm-size=4g ."
+}]
