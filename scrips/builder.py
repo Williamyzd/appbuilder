@@ -33,15 +33,16 @@ def clone_push(codes):
         if len(code) <=0:
             return
         app_name = code['name']
+        url = code['url']
         if os.path.exists(app_name):
             os.system('cd ~ && rm -rf {}'.format(app_name))
-        num,rs = subprocess.getstatusoutput('git clone {} {} '.format(code,app_name))
-        print('git clone {}'.format(code))
+        num,rs = subprocess.getstatusoutput('git clone {} {} '.format(url,app_name))
+        print('git clone {}'.format(url))
         if num != 0:
-            print('{} 下载失败,原因：{}'.format(code,rs))
+            print('{} 下载失败,原因：{}'.format(url,rs))
             return
         else:
-            print('{} 下载成功'.format(code))
+            print('{} 下载成功'.format(url))
         build_cmd = code['cmd']
         new_tag = base_registry + code['tag']
         num,rs = subprocess.getstatusoutput(build_cmd + " && docker tag {} {}".format(code['tag'],new_tag))
