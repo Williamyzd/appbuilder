@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import subprocess,os,json
-code_path = 'gits/code.txt'
+code_path = 'gits/code.json'
 base_registry = 'registry.cn-hangzhou.aliyuncs.com/reg_pub/'
 def read_codes(code_path):
     """
