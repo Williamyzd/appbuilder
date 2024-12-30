@@ -1,6 +1,6 @@
 [{
-    "name": "vllm",
-    "tag": "vllm-cpu-env:v20241006",
-    "url": "https://github.com/vllm-project/vllm.git",
-    "cmd": "cd vllm && docker build -f Dockerfile.cpu -t vllm-cpu-env:v20241006 --shm-size=4g ."
+    "name": "llama.cpp",
+    "tag": "llama.cpp:server-cuda12.2",
+    "url": "https://github.com/Williamyzd/llama.cpp.git",
+    "cmd": "docker build -t llama.cpp:server-cuda12.2 -f .devops/llama-server-cuda.Dockerfile ."
 }]
