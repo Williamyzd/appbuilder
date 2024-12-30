@@ -2,5 +2,5 @@
     "name": "llama.cpp",
     "tag": "llama.cpp:server-cuda12.2",
     "url": "https://github.com/Williamyzd/llama.cpp.git",
-    "cmd": "docker build -t llama.cpp:server-cuda12.2 -f .devops/llama-server-cuda.Dockerfile ."
+    "cmd": "cd llama.cpp && docker build -t llama.cpp:server-cuda12.2 -f .devops/llama-server-cuda.Dockerfile ."
 }]
