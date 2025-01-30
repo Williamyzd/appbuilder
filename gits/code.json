@@ -2,5 +2,5 @@
     "name": "vllm",
     "tag": "vllm:cpu-20250130",
     "url": "https://github.com/vllm-project/vllm.git",
-    "cmd": "cd vllm && docker build -f Dockerfile.cpu -t vllm-cpu-env --shm-size=4g ."
+    "cmd": "cd vllm && docker build -f Dockerfile.cpu -t vllm:cpu-20250130 --shm-size=4g ."
 }]
