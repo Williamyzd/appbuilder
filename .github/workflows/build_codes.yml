@@ -6,13 +6,19 @@ run-name: ${{ github.actor }} is build image from code
 on:
   push:
     branches: [ "main" ]
-
+env:
+  REGISTRY: ghcr.io
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 # 工作流程任务（通常含有一个或多个步骤）
 jobs:
   syncimages:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
     steps:
     - name: Checkout Repos
       uses: actions/checkout@v4
@@ -24,6 +30,12 @@ jobs:
         username: ${{ secrets.ALY_UNAME }}
         password: ${{ secrets.ALY_PASSWD }}
         logout: false
+    - name: Login to ghcr.io
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GHCR_TOKEN }}
     
     - uses: actions/setup-python@v5
       with:

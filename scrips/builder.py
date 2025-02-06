@@ -2,6 +2,8 @@
 import subprocess,os,json
 code_path = 'gits/code.json'
 base_registry = 'registry.cn-hangzhou.aliyuncs.com/reg_pub/'
+ghcr_registry = 'ghcr.io/reg_pub/'
+import datetime
 def read_codes(code_path):
     """
     读取代码仓库，返回仓库列表
@@ -44,19 +46,34 @@ def clone_push(codes):
         else:
             print('{} 下载成功'.format(url))
         build_cmd = code['cmd']
-        new_tag = base_registry + code['tag']
-        num,rs = subprocess.getstatusoutput(build_cmd + " && docker tag {} {}".format(code['tag'],new_tag))
+        ct = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+        tag = ghcr_registry +app_name+":" + code['tag']+'-'+ct
+        
+        maps ={
+            "${workdir}":code["workdir"],
+            "${file}":code["file"],
+            "${tag}":tag
+        }
+        for k,v in maps.items():
+            build_cmd = build_cmd.replace(k,v)
+
+        num,rs = subprocess.getstatusoutput(build_cmd + "  && docker push {} ".format(tag))
+        
         if num !=0 :
             print('{} 构建失败,原因：{}'.format(build_cmd,rs))
             return
         else:
             print('{} 构建成功'.format(build_cmd))
-        num,rs = subprocess.getstatusoutput('docker push {}'.format(new_tag))
-        if num !=0 :
-            print('{} 推送失败,原因：{}'.format(new_tag,rs))
-            return
-        else:
-            print('{} 推送成功'.format(new_tag))
+        if code['need_aliyun'] == True:
+            new_tag = base_registry + tag
+            num,rs = subprocess.getstatusoutput('docker tag {} {} && docker push {}'.format(tag,new_tag,new_tag))
+            if num !=0 :
+                print('{} 推送阿里云失败,原因：{}'.format(tag,rs))
+                return
+            else:
+                print('{} 推送阿里云成功'.format(new_tag))
+        
+    
 
 clone_push(read_codes(code_path))
         

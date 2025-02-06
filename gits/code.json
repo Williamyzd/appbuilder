@@ -1,6 +1,9 @@
 [{
     "name": "vllm",
-    "tag": "vllm:cpu-20250130",
+    "tag": "cpu",
+    "file": "Dockerfile.cpu",
+    "workdir": "vllm",
     "url": "https://github.com/vllm-project/vllm.git",
-    "cmd": "cd vllm && docker build -f Dockerfile.cpu -t vllm:cpu-20250130 --shm-size=4g ."
+    "need_aliyun": false,
+    "cmd": "cd ${workdir} && docker build -f ${file} -t ${tag} --shm-size=4g ."
 }]
