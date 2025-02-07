@@ -2,7 +2,8 @@
 import subprocess,os,json
 code_path = 'gits/code.json'
 base_registry = 'registry.cn-hangzhou.aliyuncs.com/reg_pub/'
-ghcr_registry = 'ghcr.io/reg_pub/'
+## 修改为自己的账户名称
+ghcr_registry = 'ghcr.io/williamyzd/'
 import datetime
 def read_codes(code_path):
     """
@@ -56,9 +57,8 @@ def clone_push(codes):
         }
         for k,v in maps.items():
             build_cmd = build_cmd.replace(k,v)
-
-        num,rs = subprocess.getstatusoutput(build_cmd + "  && docker push {} ".format(tag))
-        
+        build_cmd = build_cmd + "  && docker push {} ".format(tag) if code['need_push'] else build_cmd
+        num,rs = subprocess.getstatusoutput(build_cmd)
         if num !=0 :
             print('{} 构建失败,原因：{}'.format(build_cmd,rs))
             return
@@ -74,7 +74,6 @@ def clone_push(codes):
                 print('{} 推送阿里云成功'.format(new_tag))
         
     
-
 clone_push(read_codes(code_path))
         
 

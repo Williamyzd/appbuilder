@@ -1,9 +1,13 @@
 [{
-    "name": "vllm",
-    "tag": "cpu",
-    "file": "Dockerfile.cpu",
-    "workdir": "vllm",
-    "url": "https://github.com/vllm-project/vllm.git",
+    "name": "cuda",
+    "tag": "11.4",
+    "file": "",
+    "workdir": "cuda",
+    "url": "https://gitlab.com/nvidia/container-images/cuda.git",
     "need_aliyun": false,
-    "cmd": "cd ${workdir} && docker build -f ${file} -t ${tag} --shm-size=4g ."
+    "need_ghcr":true,
+    "need_push":false,
+    "need_time_tag":false,
+    "cmd": "./build.sh -d --image-name ghcr.io/williamyzd/cuda --cuda-version 11.4 --os ubuntu --os-version 20.04 --arch x86_64,arm64 --push"
+    
 }]
