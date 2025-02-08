@@ -1,6 +1,6 @@
 # appbuilder
 打镜像专用
-1. 根据代码仓库打镜像
+根据代码仓库打镜像
 编辑 gits/gits.txt 文件，添加如下信息（默认数组，支持若干个）：
 ```
 [{
@@ -22,7 +22,7 @@
 基本处理逻辑：
 * 拉取代码
 * 执行 cmd 指定的命令 or diy_cmd 指定的命令
-# 默认会打ghcr.io 镜像仓库镜像。镜像前缀在scripts/build_image.sh 中指定为：ghcr.io/github账户名/
+* 默认会打ghcr.io 镜像仓库镜像。镜像前缀在scripts/build_image.sh 中指定为：ghcr.io/github账户名/
 * 如果 need_aliyun 为 true，则会额外执行以下操作：
     - 镜像打 tag，镜像名称为 name:tag + 时间戳
     - push 镜像到阿里云镜像仓库
