@@ -4,6 +4,7 @@ code_path = 'gits/code.json'
 base_registry = 'registry.cn-hangzhou.aliyuncs.com/reg_pub/'
 ## 修改为自己的账户名称
 ghcr_registry = 'ghcr.io/williamyzd/'
+app_path = 'app'
 import datetime
 def get_safe_value(dic:dict,key):
     value = None
@@ -47,9 +48,9 @@ def clone_push(codes):
             return
         app_name = code['name']
         url = code['url']
-        if os.path.exists(app_name):
-            os.system('cd ~ && rm -rf {}'.format(app_name))
-        num,rs = subprocess.getstatusoutput('git clone {} {} '.format(url,app_name))
+        if os.path.exists(app_path):
+            os.system('cd ~ && rm -rf {}'.format(app_path))
+        num,rs = subprocess.getstatusoutput('git clone {} {} '.format(url,app_path))
         print('git clone {}'.format(url))
         if num != 0:
             print('{} 下载失败,原因：{}'.format(url,rs))
@@ -57,7 +58,7 @@ def clone_push(codes):
         else:
             print('{} 下载成功'.format(url))
         diy_cmd = get_safe_value(code,'diy_cmd')
-        build_cmd = diy_cmd if diy_cmd else get_safe_value(code,'cmd')
+        build_cmd = "cd {} ".format(app_path) + (diy_cmd if diy_cmd else get_safe_value(code,'cmd'))
         print("开始构建 {}".format(app_name))
         tag = ghcr_registry +app_name+":" + code['tag']
         if get_safe_value(code,'need_time_tag'):
