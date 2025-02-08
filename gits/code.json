@@ -1,12 +1,12 @@
 [{
-    "name": "appbuilder/vllm-openai",
-    "tag": "CUDA-11.8.0",
-    "file": "Dockerfile",
-    "workdir": "vllm",
-    "url": "https://github.com/Williamyzd/vllm.git",
+    "name": "appbuilder/lama.cpp",
+    "tag": "cpu",
+    "file": ".devops/cpu.Dockerfile",
+    "workdir": ".",
+    "url": "https://github.com/Williamyzd/llama.cpp.git",
     "need_aliyun": true,
     "need_time_tag":true,
-    "cmd": "ls -l && DOCKER_BUILDKIT=1  docker build -t ${tag} -f ${file} --build-arg max_jobs=8 --build-arg nvcc_threads=2 .",
+    "cmd": "cd ${workdir} && docker build -t ${tag} -f ${file} --build-arg max_jobs=8 .",
     "diy_cmd":""
     
 }]
