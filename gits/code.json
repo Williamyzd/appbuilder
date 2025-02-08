@@ -2,7 +2,7 @@
     "name": "llama.cpp",
     "tag": "cuda-11.8.0",
     "file": "cuda.Dockerfile",
-    "workdir": ".devops",
+    "workdir": "llama.cpp/.devops",
     "url": "https://github.com/Williamyzd/llama.cpp.git",
     "need_aliyun": false,
     "need_time_tag":true,
