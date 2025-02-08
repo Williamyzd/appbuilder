@@ -1,12 +1,11 @@
 [{
-    "name": "appbuilder/lama.cpp",
+    "name": "appbuilder/vllm-openai",
     "tag": "cpu",
-    "file": ".devops/cpu.Dockerfile",
+    "file": "Dockerfile.cpu",
     "workdir": ".",
-    "url": "https://github.com/Williamyzd/llama.cpp.git",
+    "url": "https://github.com/Williamyzd/vllm.git",
     "need_aliyun": true,
     "need_time_tag":true,
-    "cmd": "cd ${workdir} && docker build -t ${tag} -f ${file} --build-arg max_jobs=8 .",
+    "cmd": "cd ${workdir} && DOCKER_BUILDKIT=1  docker build -t ${tag} -f ${file} --build-arg max_jobs=8  .",
     "diy_cmd":""
-    
-}]
+    }]
