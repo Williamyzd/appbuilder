@@ -1,8 +1,8 @@
 [{
     "name": "llama.cpp",
     "tag": "cuda-11.8.0",
-    "file": "cuda.Dockerfile",
-    "workdir": "llama.cpp/.devops",
+    "file": ".devops/cuda.Dockerfile",
+    "workdir": "llama.cpp",
     "url": "https://github.com/Williamyzd/llama.cpp.git",
     "need_aliyun": false,
     "need_time_tag":true,
