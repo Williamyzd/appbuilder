@@ -8,6 +8,6 @@
     "need_ghcr":true,
     "need_push":false,
     "need_time_tag":false,
-    "cmd": "cd cuda && ls -l && ./build.sh -d --image-name ghcr.io/williamyzd/cuda --cuda-version 11.4 --os ubuntu --os-version 20.04 --arch x86_64,arm64 --push"
+    "cmd": "cd cuda && ls -l && ./build.sh -d --image-name ghcr.io/williamyzd/cuda --cuda-version 11.4.3 --os ubuntu --os-version 20.04 --arch x86_64,arm64 --push"
     
 }]
