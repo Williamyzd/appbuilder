@@ -6,7 +6,7 @@
     "url": "https://github.com/Williamyzd/vllm.git",
     "need_aliyun": true,
     "need_time_tag":true,
-    "cmd": "cd ${workdir} && DOCKER_BUILDKIT=1  docker build -t ${tag} -f ${file} --build-arg max_jobs=8 --build-arg nvcc_threads=2 .",
+    "cmd": "ls -l && cd ${workdir} && DOCKER_BUILDKIT=1  docker build -t ${tag} -f ${file} --build-arg max_jobs=8 --build-arg nvcc_threads=2 .",
     "diy_cmd":""
     
 }]
