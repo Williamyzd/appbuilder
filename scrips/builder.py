@@ -9,7 +9,7 @@ def get_safe_value(dic:dict,key):
     value = None
     if key in dic.keys():
         value = dic[key]
-        if len(value) <= 0:
+        if isinstance(value, str) and len(value) <= 0:
             value = None
             print('{} 值为空'.format(key))
     else:
