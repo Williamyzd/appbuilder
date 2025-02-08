@@ -3,7 +3,7 @@ import subprocess,os,json
 code_path = 'gits/code.json'
 base_registry = 'registry.cn-hangzhou.aliyuncs.com/reg_pub/'
 ## 修改为自己的账户名称
-ghcr_registry = 'ghcr.io/williamyzd/'
+ghcr_registry = 'ghcr.io/williamyzd/appbuilder/'
 app_path = 'app'
 import datetime
 def get_safe_value(dic:dict,key):
@@ -60,10 +60,11 @@ def clone_push(codes):
         diy_cmd = get_safe_value(code,'diy_cmd')
         build_cmd = "cd {} ".format(app_path) + (diy_cmd if diy_cmd else get_safe_value(code,'cmd'))
         print("开始构建 {}".format(app_name))
-        tag = ghcr_registry +app_name+":" + code['tag']
+        tag = app_name+":" + code['tag']
         if get_safe_value(code,'need_time_tag'):
             ct = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
             tag = tag + '-' + ct
+        ghcr_tag = ghcr_registry  + tag
         maps ={
             "${workdir}":code["workdir"],
             "${file}":code["file"],
