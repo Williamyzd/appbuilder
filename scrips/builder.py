@@ -5,6 +5,16 @@ base_registry = 'registry.cn-hangzhou.aliyuncs.com/reg_pub/'
 ## 修改为自己的账户名称
 ghcr_registry = 'ghcr.io/williamyzd/'
 import datetime
+def get_safe_value(dic:dict,key):
+    value = None
+    if key in dic.keys():
+        value = dic[key]
+        if len(value) <= 0:
+            value = None
+            print('{} 值为空'.format(key))
+    else:
+        print('{} 不存在'.format(key))  
+    return value
 def read_codes(code_path):
     """
     读取代码仓库，返回仓库列表
@@ -46,10 +56,13 @@ def clone_push(codes):
             return
         else:
             print('{} 下载成功'.format(url))
-        build_cmd = code['cmd']
-        ct = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-        tag = ghcr_registry +app_name+":" + code['tag']+'-'+ct
-        
+        diy_cmd = get_safe_value(code,'diy_cmd')
+        build_cmd = diy_cmd if diy_cmd else get_safe_value(code,'cmd')
+        print("开始构建 {}".format(app_name))
+        tag = ghcr_registry +app_name+":" + code['tag']
+        if get_safe_value(code,'need_time_tag'):
+            ct = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+            tag = tag + '-' + ct
         maps ={
             "${workdir}":code["workdir"],
             "${file}":code["file"],
@@ -57,7 +70,7 @@ def clone_push(codes):
         }
         for k,v in maps.items():
             build_cmd = build_cmd.replace(k,v)
-        build_cmd = build_cmd + "  && docker push {} ".format(tag) if code['need_push'] else build_cmd
+        build_cmd = build_cmd + "  && docker push {} ".format(tag) 
         num,rs = subprocess.getstatusoutput(build_cmd)
         if num !=0 :
             print('{} 构建失败,原因：{}'.format(build_cmd,rs))

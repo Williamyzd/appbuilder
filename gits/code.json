@@ -1,13 +1,12 @@
 [{
-    "name": "cuda",
-    "tag": "11.4",
-    "file": "",
-    "workdir": "cuda",
-    "url": "https://gitlab.com/nvidia/container-images/cuda.git",
+    "name": "llama.cpp",
+    "tag": "cuda-11.8.0",
+    "file": "cuda.Dockerfile",
+    "workdir": ".devops",
+    "url": "https://github.com/Williamyzd/llama.cpp.git",
     "need_aliyun": false,
-    "need_ghcr":true,
-    "need_push":false,
-    "need_time_tag":false,
-    "cmd": "cd cuda && ls -l && ./build.sh -d --image-name ghcr.io/williamyzd/cuda --cuda-version 11.4 --os ubuntu --os-version 20.04 --arch x86_64,arm64 --push"
+    "need_time_tag":true,
+    "cmd": "cd ${workdir} && docker build -t ${tag} -f ${file} .",
+    "diy_cmd":""
     
 }]
