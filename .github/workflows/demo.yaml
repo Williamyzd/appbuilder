@@ -13,4 +13,4 @@ jobs:
     - name: Create a file
       run: |
         echo "Hello, World!" > ${{ github.workspace }}/log.txt
-        cat ${{ github.workspace }}/example.txt  # Optional: Verify the file content
+        cat ${{ github.workspace }}/log.txt # Optional: Verify the file content
