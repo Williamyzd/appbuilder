@@ -58,7 +58,7 @@ def clone_push(codes):
         else:
             print('{} 下载成功'.format(url))
         diy_cmd = get_safe_value(code,'diy_cmd')
-        build_cmd = "cd {} ".format(app_path) + (diy_cmd if diy_cmd else get_safe_value(code,'cmd'))
+        build_cmd = "cd {} && ".format(app_path) + (diy_cmd if diy_cmd else get_safe_value(code,'cmd'))
         print("开始构建 {}".format(app_name))
         tag = app_name+":" + code['tag']
         if get_safe_value(code,'need_time_tag'):

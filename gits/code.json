@@ -1,5 +1,5 @@
 [{
-"name": "lama.cpp",
+"name": "llama.cpp",
     "tag": "cuda-11.4.3",
     "file": ".devops/cuda.Dockerfile",
     "workdir": ".",
