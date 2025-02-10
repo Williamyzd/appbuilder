@@ -6,6 +6,6 @@
     "url": "https://github.com/Williamyzd/llama.cpp.git",
     "need_aliyun": true,
     "need_time_tag":true,
-    "cmd": "docker build -t ${tag} -f ${file} --build-arg max_jobs=8 .",
+    "cmd": "docker build -t ${tag} -f ${file} --build-arg max_jobs=8 . ",
     "diy_cmd":""
     }]
