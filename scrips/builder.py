@@ -72,7 +72,7 @@ def clone_push(codes):
         }
         for k,v in maps.items():
             build_cmd = build_cmd.replace(k,v)
-        build_cmd = build_cmd + "  docker tag {} {} && docker push {} ".format(tag,ghcr_tag,ghcr_tag) 
+        build_cmd = build_cmd + " && docker tag {} {} && docker push {} ".format(tag,ghcr_tag,ghcr_tag) 
         num,rs = subprocess.getstatusoutput(build_cmd)
         if num !=0 :
             print('{} 构建失败,原因：{}'.format(build_cmd,rs))
