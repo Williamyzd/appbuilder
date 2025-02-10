@@ -1,11 +1,11 @@
 [{
 "name": "llama.cpp",
-    "tag": "cuda-11.4.3",
+    "tag": "cuda-11.3.1",
     "file": ".devops/cuda.Dockerfile",
     "workdir": ".",
     "url": "https://github.com/Williamyzd/llama.cpp.git",
     "need_aliyun": true,
     "need_time_tag":true,
-    "cmd": "docker build -t ${tag} -f ${file} --build-arg max_jobs=8 . ",
+    "cmd": "docker build -t ${tag} -f ${file} --build-arg max_jobs=8 .",
     "diy_cmd":""
     }]
